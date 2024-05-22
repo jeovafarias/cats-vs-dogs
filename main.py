@@ -51,13 +51,16 @@ def make_prediction(image_file):
 
     classes = model_deploy(img.float().unsqueeze(0)).numpy()
     prob_dog = classes[0][0]
-    if prob_dog > 0.5:
+    if prob_dog > 0.9:
         label = "dog"
         confidence =  np.round(100 * prob_dog, 2)
-    else:
+    elif prob_dog < 0.1:
         label = "cat"
         confidence = np.round(100 * (1 - prob_dog), 2)
-
+    else:
+        label = "other"
+        conf = 1 - abs(prob_dog - 0.5)/0.4
+        confidence =  np.round(100 * conf, 2)
     return label, confidence
 
 
