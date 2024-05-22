@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat or Dog?</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        header {
+            text-align: center;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .button{
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #fileToUpload {
+            display: none;
+        }
+        #preview {
+            margin-top: 20px;
+            text-align: center;
+        }
+        #preview img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border:10px solid;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <h2>Cat vs. Dog Classifier</h2>
+        </div>
+    </header>
+
+    <div>
+        <form action="{{ url_for('predict')}}" method="POST" enctype="multipart/form-data" id="uploadForm">
+            <label for="fileToUpload" class="button"><i class="fas fa-cloud-upload-alt"></i> Upload Image</label>
+            <input type="file" name="image" id="fileToUpload" onchange="previewImage()">
+            <input type="submit" class="button" value="Predict the Image">
+        </form>
+
+        <div id="preview"></div>
+    </div>
+
+    <script>
+        function previewImage() {
+            var fileInput = document.getElementById('fileToUpload');
+            var preview = document.getElementById('preview');
+
+            while (preview.firstChild) {
+                preview.removeChild(preview.firstChild);
+            }
+
+            var file = fileInput.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var img = document.createElement('img');
+                img.src = e.target.result;
+                preview.appendChild(img);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    </script>
+
+</body>
+</html>

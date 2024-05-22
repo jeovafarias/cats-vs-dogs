@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat or Dog?</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .results {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <h2>Classification Results</h2>
+        </div>
+    </header>
+    <div class="results">
+        <h1>This is a <span style="color: #f00">{{ prediction }}</span> ({{ confidence }}% confidence)!</h1>
+    </div>
+</body>
+</html>
